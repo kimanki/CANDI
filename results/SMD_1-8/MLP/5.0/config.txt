@@ -1,0 +1,124 @@
+DATA:
+  BASE_DIR: data
+  DOWNSAMPLE_RATE: 1
+  NAME: SMD_1-8
+  N_VAR: 38
+  SAMPLING_RATES: 1.0
+  SCALE: standard
+  TEST_STEP: 1
+  TRAIN_RATIO: 0.8
+  TRAIN_STEP: 1
+  WIN_SIZE: 10
+DATA_LOADER:
+  DROP_LAST: true
+  NUM_WORKERS: 2
+  PIN_MEMORY: true
+MLP:
+  LOSS_NAMES: &id001
+  - Recon
+  METRIC_NAMES: *id001
+  Z_SIZE: 128
+MODEL:
+  NAME: MLP
+NUM_GPUS: 4
+RESULT_DIR: results/SMD_1-8/MLP/5.0
+SANA:
+  TYPE: TCN_iTrans
+  activation: gelu
+  d_ff: 512
+  d_model: 512
+  dropout: 0.0
+  e_layers: 1
+  n_heads: 8
+  output_attention: true
+SEED: 0
+SOLVER:
+  BASE_LR: 0.0001
+  COSINE_AFTER_WARMUP: true
+  COSINE_END_LR: 0.0
+  DAMPENING: 0.0
+  GRADIENT_CLIP: true
+  GRADIENT_CLIP_NORM: 0.5
+  LR_POLICY: cosine
+  MAX_EPOCH: 30
+  MOMENTUM: 0.9
+  NESTEROV: true
+  OPTIMIZING_METHOD: adam
+  START_EPOCH: 0
+  WARMUP_EPOCHS: 5
+  WARMUP_START_LR: 0.0001
+  WEIGHT_DECAY: 0.0001
+TEST:
+  ANOMALY_SCORES_DIR: ''
+  BATCH_SIZE: 256
+  DROP_LAST: false
+  ENABLE: true
+  SHUFFLE: false
+  SPLIT: test
+  THRESHOLD:
+    ANOMALY_RATIO: 5.0
+    TYPE: ratio
+  TTA:
+    CANDI:
+      GATING_INIT: 0.5
+      MIN_SAMPLES: 16
+      USE_FPM: true
+      USE_HARD: true
+      USE_MODERATE: true
+      USE_SANA: true
+    ENABLE: true
+    M2N2:
+      GAMMA: 0.99999
+    METHOD: CANDI
+    SOLVER:
+      BASE_LR: 0.03
+      DAMPENING: 0.0
+      GRADIENT_CLIP: true
+      GRADIENT_CLIP_NORM: 0.5
+      MOMENTUM: 0.9
+      NESTEROV: true
+      OPTIMIZING_METHOD: sgd
+      WEIGHT_DECAY: 0.0001
+    STEPS: 1
+TIMESNET:
+  LOSS_NAMES: *id001
+  METRIC_NAMES: *id001
+  anomaly_ratio: 1
+  c_out: 38
+  d_ff: 512
+  d_model: 512
+  dropout: 0.1
+  e_layers: 2
+  embed: timeF
+  enc_in: 38
+  freq: h
+  num_kernels: 6
+  pred_len: 0
+  top_k: 3
+TRAIN:
+  BATCH_SIZE: 256
+  CHECKPOINT_DIR: results/SMD_1-8/MLP
+  CHECKPOINT_PERIOD: 200
+  DROP_LAST: true
+  ENABLE: false
+  EVAL_PERIOD: 5
+  IS_METRIC_LOWER_BETTER: true
+  METRIC_BEST: .inf
+  PRINT_FREQ: 100
+  RESUME: ''
+  SAVE_EVERY_EVAL: false
+  SHUFFLE: true
+  SPLIT: train
+VAL:
+  BATCH_SIZE: 256
+  DROP_LAST: false
+  SHUFFLE: false
+  SPLIT: val
+VISIBLE_DEVICES: 0
+WANDB:
+  DIR: ''
+  ENABLE: false
+  JOB_TYPE: ''
+  NAME: ''
+  NOTES: ''
+  PROJECT: CANDI

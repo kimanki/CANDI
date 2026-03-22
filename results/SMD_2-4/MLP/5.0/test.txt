@@ -1,0 +1,1 @@
+AUROC_wo_tta: 0.8210, AUPRC_wo_tta: 0.4565, Precision_wo_tta: 0.1953, Recall_wo_tta: 0.8250, F1_wo_tta: 0.3158, AUROC_w_tta: 0.8991, AUPRC_w_tta: 0.5979, Precision_w_tta: 0.4504, Recall_w_tta: 0.7263, F1_w_tta: 0.5560
